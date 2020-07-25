@@ -5,10 +5,10 @@ package main
 import (
 	"fmt"
 
+	"github.com/gabstv/ebiten"
 	"github.com/gabstv/ebiten-imgui/renderer"
-	"github.com/hajimehoshi/ebiten"
-	"github.com/hajimehoshi/ebiten/ebitenutil"
-	"github.com/hajimehoshi/ebiten/inpututil"
+	"github.com/gabstv/ebiten/ebitenutil"
+	"github.com/gabstv/ebiten/inpututil"
 	"github.com/inkyblackness/imgui-go/v2"
 )
 

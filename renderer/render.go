@@ -5,8 +5,8 @@ import (
 	"image"
 	"unsafe"
 
+	"github.com/gabstv/ebiten"
 	"github.com/gabstv/ebiten-imgui/internal/native"
-	"github.com/hajimehoshi/ebiten"
 	"github.com/inkyblackness/imgui-go/v2"
 )
 

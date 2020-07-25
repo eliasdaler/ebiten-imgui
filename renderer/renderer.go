@@ -5,7 +5,7 @@ import (
 	"sync/atomic"
 	"unsafe"
 
-	"github.com/hajimehoshi/ebiten"
+	"github.com/gabstv/ebiten"
 	"github.com/inkyblackness/imgui-go/v2"
 )
 
