@@ -9,7 +9,7 @@ import (
 	"github.com/gabstv/ebiten-imgui/renderer"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
-	"github.com/inkyblackness/imgui-go/v2"
+	"github.com/inkyblackness/imgui-go/v4"
 )
 
 func main() {

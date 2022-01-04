@@ -9,7 +9,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
-	"github.com/inkyblackness/imgui-go/v2"
+	"github.com/inkyblackness/imgui-go/v4"
 )
 
 // Example with the main Demo window and ClipMask
@@ -19,6 +19,7 @@ func main() {
 
 	ebiten.SetWindowSize(1024, 768)
 	ebiten.SetWindowResizable(true)
+	ebiten.SetMaxTPS(15)
 
 	gg := &G{
 		mgr:    mgr,
@@ -38,6 +39,19 @@ type G struct {
 }
 
 func (g *G) Draw(screen *ebiten.Image) {
+	g.mgr.Render()
+	g.mgr.Draw(screen)
+
+	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("TPS: %.2f", ebiten.CurrentTPS()), 10, 2)
+	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("FPS: %.2f", ebiten.CurrentFPS()), 10, 20)
+}
+
+func (g *G) Update() error {
+	g.mgr.Update(1.0/60.0, float32(g.w), float32(g.h))
+	if inpututil.IsKeyJustPressed(ebiten.KeyC) {
+		g.mgr.ClipMask = !g.mgr.ClipMask
+	}
+
 	g.mgr.BeginFrame()
 
 	{
@@ -49,17 +63,8 @@ func (g *G) Draw(screen *ebiten.Image) {
 			imgui.ShowDemoWindow(&g.showDemoWindow)
 		}
 	}
+	g.mgr.EndFrame()
 
-	g.mgr.EndFrame(screen)
-	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("TPS: %.2f", ebiten.CurrentTPS()), 10, 2)
-	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("[C]lipMask: %t", g.mgr.ClipMask), 10, 20)
-}
-
-func (g *G) Update() error {
-	g.mgr.Update(1.0/60.0, float32(g.w), float32(g.h))
-	if inpututil.IsKeyJustPressed(ebiten.KeyC) {
-		g.mgr.ClipMask = !g.mgr.ClipMask
-	}
 	return nil
 }
 

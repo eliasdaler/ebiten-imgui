@@ -4,7 +4,7 @@ import (
 	"runtime"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/inkyblackness/imgui-go/v2"
+	"github.com/inkyblackness/imgui-go/v4"
 )
 
 //var nextTextureID int32
@@ -79,8 +79,15 @@ func (m *Manager) BeginFrame() {
 	imgui.NewFrame()
 }
 
-func (m *Manager) EndFrame(screen *ebiten.Image) {
+func (m *Manager) EndFrame() {
+	imgui.EndFrame()
+}
+
+func (m *Manager) Render() {
 	imgui.Render()
+}
+
+func (m *Manager) Draw(screen *ebiten.Image) {
 	if m.ClipMask {
 		if m.lmask == nil {
 			w, h := screen.Size()
